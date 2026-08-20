@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ATLAS TO PARADISE | Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Noto+Sans+JP:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#050510;
+    --surface:#0B0B18;
+    --surface-2:#101025;
+    --accent:#00ffcc;
+    --accent-dim:rgba(0,255,204,0.15);
+    --text:#F2F4F3;
+    --text-dim:#8899a6;
+    --line:rgba(0,255,204,0.16);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Noto Sans JP',sans-serif;
+    line-height:1.7;
+  }
+  .mono{font-family:'JetBrains Mono',monospace;}
+  h1,h2,h3{font-family:'Space Grotesk',sans-serif;letter-spacing:0.01em;}
+
+  .wrap{max-width:920px;margin:0 auto;padding:0 28px;}
+
+  /* nav */
+  nav{position:sticky;top:0;z-index:20;background:rgba(5,5,16,0.85);backdrop-filter:blur(12px);
+     border-bottom:1px solid var(--line);}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:64px;}
+  .brand{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:0.95rem;letter-spacing:0.05em;color:var(--accent);text-decoration:none;}
+  .back-link{font-size:0.78rem;color:var(--text-dim);text-decoration:none;border:1px solid var(--line);
+     padding:7px 14px;border-radius:20px;transition:all .2s;}
+  .back-link:hover{color:var(--accent);border-color:var(--accent);}
+
+  /* hero */
+  .hero{padding:96px 0 64px;border-bottom:1px solid var(--line);position:relative;overflow:hidden;}
+  .hero::before{content:"";position:absolute;top:-40%;right:-10%;width:520px;height:520px;
+     border:1px solid var(--line);border-radius:50%;}
+  .hero::after{content:"";position:absolute;top:-25%;right:5%;width:340px;height:340px;
+     border:1px solid var(--line);border-radius:50%;}
+  .eyebrow{font-size:0.7rem;letter-spacing:0.3em;color:var(--accent);margin-bottom:18px;}
+  .hero h1{font-size:2.6rem;font-weight:700;max-width:680px;line-height:1.35;margin-bottom:20px;}
+  .hero h1 span{color:var(--accent);}
+  .hero p{color:var(--text-dim);max-width:520px;font-size:0.95rem;margin-bottom:32px;}
+  .hero-ctas{display:flex;gap:12px;flex-wrap:wrap;}
+  .btn{font-size:0.82rem;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:500;
+     letter-spacing:0.03em;transition:all .2s;display:inline-block;}
+  .btn-primary{background:var(--accent);color:#04140f;}
+  .btn-primary:hover{box-shadow:0 0 24px rgba(0,255,204,0.4);transform:translateY(-1px);}
+  .btn-ghost{border:1px solid var(--line);color:var(--text);}
+  .btn-ghost:hover{border-color:var(--accent);color:var(--accent);}
+
+  section{padding:72px 0;border-bottom:1px solid var(--line);}
+  .section-head{margin-bottom:40px;}
+  .section-num{font-size:0.7rem;color:var(--accent);letter-spacing:0.2em;margin-bottom:10px;}
+  .section-head h2{font-size:1.6rem;font-weight:700;}
+
+  /* can-do */
+  .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+  .skill-card{background:var(--surface);border:1px solid var(--line);border-radius:4px;padding:24px;position:relative;}
+  .skill-card::before,.skill-card::after{content:"";position:absolute;width:10px;height:10px;
+     border:1px solid var(--accent);opacity:0.6;}
+  .skill-card::before{top:-1px;left:-1px;border-right:none;border-bottom:none;}
+  .skill-card::after{bottom:-1px;right:-1px;border-left:none;border-top:none;}
+  .skill-card .tag{font-size:0.68rem;color:var(--accent);letter-spacing:0.1em;margin-bottom:10px;}
+  .skill-card h3{font-size:1rem;font-weight:700;margin-bottom:10px;}
+  .skill-card p{font-size:0.82rem;color:var(--text-dim);}
+
+  /* works */
+  .work-item{display:grid;grid-template-columns:280px 1fr;gap:28px;padding:32px 0;border-bottom:1px solid var(--line);align-items:start;}
+  .work-item:last-child{border-bottom:none;}
+  .work-media{width:100%;border-radius:8px;overflow:hidden;border:1px solid var(--line);background:var(--surface-2);}
+  .work-media img, .work-media video{width:100%;height:180px;object-fit:cover;display:block;}
+  .media-fallback{width:100%;height:180px;display:flex;align-items:center;justify-content:center;
+     text-align:center;font-size:0.72rem;color:var(--text-dim);padding:0 16px;background:var(--surface-2);}
+  .work-item .wnum{font-family:'JetBrains Mono',monospace;font-size:0.75rem;color:var(--accent);margin-bottom:4px;}
+  .work-item h3{font-size:1.1rem;margin-bottom:10px;}
+  .work-item p{font-size:0.85rem;color:var(--text-dim);margin-bottom:12px;line-height:1.6;}
+  .work-item p a{color:var(--accent);text-decoration:none;margin-left:6px;font-weight:500;}
+  .work-item p a:hover{text-decoration:underline;}
+  .work-item .stack{display:flex;flex-wrap:wrap;gap:6px;}
+  .chip{font-family:'JetBrains Mono',monospace;font-size:0.65rem;color:var(--text-dim);
+     border:1px solid var(--line);padding:3px 9px;border-radius:12px;}
+
+  /* about */
+  .about-grid{display:grid;grid-template-columns:1.1fr 0.9fr;gap:48px;align-items:start;}
+  .about-grid p{font-size:0.9rem;color:var(--text-dim);margin-bottom:16px;}
+  .toolbox{display:flex;flex-wrap:wrap;gap:8px;}
+
+  /* price */
+  .price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+  .price-card{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:26px;}
+  .price-card .name{font-size:0.85rem;font-weight:500;margin-bottom:6px;}
+  .price-card .amount{font-family:'Space Grotesk',sans-serif;font-size:1.5rem;color:var(--accent);font-weight:700;margin-bottom:12px;}
+  .price-card .desc{font-size:0.78rem;color:var(--text-dim);}
+
+  /* faq */
+  .faq-item{padding:18px 0;border-bottom:1px solid var(--line);}
+  .faq-item:last-child{border-bottom:none;}
+  .faq-item .q{font-size:0.92rem;font-weight:500;margin-bottom:8px;display:flex;gap:10px;}
+  .faq-item .q span{color:var(--accent);}
+  .faq-item .a{font-size:0.84rem;color:var(--text-dim);padding-left:22px;}
+
+  /* contact */
+  .contact-box{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:40px;text-align:center;}
+  .contact-box h2{font-size:1.4rem;margin-bottom:12px;}
+  .contact-box p{color:var(--text-dim);font-size:0.88rem;margin-bottom:26px;max-width:440px;margin-left:auto;margin-right:auto;}
+  footer{padding:40px 0;text-align:center;font-size:0.72rem;color:var(--text-dim);letter-spacing:0.05em;}
+
+  @media (max-width:760px){
+    .hero h1{font-size:1.9rem;}
+    .grid-3{grid-template-columns:1fr;}
+    .work-item{grid-template-columns:1fr;}
+    .work-media img, .work-media video{height:auto;max-height:220px;}
+    .about-grid{grid-template-columns:1fr;}
+    .price-grid{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a href="index.html" class="brand">ATLAS TO PARADISE</a>
+    <a href="index.html" class="back-link">← AIナビゲーターに戻る</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">HATTORI — WEB MARKETER / CREATOR</div>
+    <h1>データと美意識で、<br>事業の<span>伸びしろ</span>を形にする。</h1>
+    <p>6年間、旅をしながら独立稼働してきたWebマーケター。SEO・SNS運用・LP改善・AI活用を、分析力と実装力の両輪で支援します。</p>
+    <div class="hero-ctas">
+      <a href="index.html" class="btn btn-primary">AIに無料相談する</a>
+      <a href="#works" class="btn btn-ghost">実績を見る</a>
+    </div>
+  </div>
+</header>
+
+<section id="candoo">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-num mono">01 / CAN DO</div>
+      <h2>提供できること</h2>
+    </div>
+    <div class="grid-3">
+      <div class="skill-card">
+        <div class="tag mono">SEO</div>
+        <h3>SEOブログ戦略</h3>
+        <p>キーワード選定、競合分析、リライト構成案の作成まで一気通貫で支援します。</p>
+      </div>
+      <div class="skill-card">
+        <div class="tag mono">LP / WEB</div>
+        <h3>LP・Web改善</h3>
+        <p>ユーザー導線(FV/CTA)の分析とワイヤーフレーム作成(Figma)で成約率を底上げします。</p>
+      </div>
+      <div class="skill-card">
+        <div class="tag mono">SNS</div>
+        <h3>SNS運用代行</h3>
+        <p>投稿設計から分析まで、Instagram運用の実践知見をもとに継続的に改善します。</p>
+      </div>
+      <div class="skill-card">
+        <div class="tag mono">AI</div>
+        <h3>AIコンサルティング</h3>
+        <p>業務のどこにAIを組み込めるか、実装まで含めて具体的に提案します。</p>
+      </div>
+      <div class="skill-card">
+        <div class="tag mono">JP ⇄</div>
+        <h3>ネイティブ日本語翻訳</h3>
+        <p>自然な日本語表現でのローカライズ、日本語コーチングにも対応します。</p>
+      </div>
+      <div class="skill-card">
+        <div class="tag mono">DEV</div>
+        <h3>フロントエンド実装</h3>
+        <p>HTML/CSS/JS、Python(画像処理・データ処理)による高度な作品制作も自力で行います。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="works">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-num mono">02 / WORKS</div>
+      <h2>実績・制作事例</h2>
+    </div>
+
+    <!-- WORK 01 -->
+    <div class="work-item">
+      <div class="work-media">
+        <img src="1.png" alt="WORK 01"
+             onerror="this.onerror=(function(){this.replaceWith(Object.assign(document.createElement('div'),{className:'media-fallback',textContent:'画像を読み込めません（1.png / １.png をご確認ください）'}));});this.src='１.png';">
+      </div>
+      <div>
+        <div class="wnum">WORK 01</div>
+        <h3>書道スクロールサイト</h3>
+        <p>
+          Python画像処理(scikit-image, OpenCV, NetworkX)で実際の墨の中心線を出し、正しい筆順でSVGアニメーションとして再現した書道スクロールサイト。
+          <a href="書道.html">詳細を見る (書道.html)</a>
+        </p>
+        <div class="stack">
+          <span class="chip">Python</span><span class="chip">OpenCV</span><span class="chip">SVG Animation</span><span class="chip">NetworkX</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- WORK 02 -->
+    <div class="work-item">
+      <div class="work-media">
+        <video src="van.mp4" autoplay loop muted playsinline></video>
+      </div>
+      <div>
+        <div class="wnum">WORK 02</div>
+        <h3>Wandering Ledger — バンライフ 会計士の冒険記</h3>
+        <p>
+          ダークパレット×アンバーアクセントのバンライフ物語マガジンサイト。モーフィングするヒーローテキストと、複数エピソードの交互レイアウトで構成。
+          <a href="van.html">詳細を見る (van.html)</a>
+        </p>
+        <div class="stack">
+          <span class="chip">HTML/CSS</span><span class="chip">JS Animation</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- WORK 03 -->
+    <div class="work-item">
+      <div class="work-media">
+        <video src="202608-19-5.mp4" autoplay loop muted playsinline></video>
+      </div>
+      <div>
+        <div class="wnum">WORK 03</div>
+        <h3>Taichung Travel Prototype</h3>
+        <p>
+          台中の視覚モックアップを、モーダル表示・レスポンシブ対応込みで完全コーディング。大容量base64アセットの安定した扱い方も確立。
+          <a href="taiwan.html">詳細を見る (taiwan.html)</a>
+        </p>
+        <div class="stack">
+          <span class="chip">HTML/CSS</span><span class="chip">Python (BeautifulSoup)</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- WORK 04 -->
+    <div class="work-item">
+      <div class="work-media">
+        <img src="２.png" alt="WORK 04">
+      </div>
+      <div>
+        <div class="wnum">WORK 04</div>
+        <h3>リフォーム会社のご提案用サイト</h3>
+        <p>
+          住まいの刷新や改修事例を魅力的に伝えるリフォーム事業者向けのデザインプロトタイプ。見やすさと見積もり・相談導線を両立したレイアウト設計。
+        </p>
+        <div class="stack">
+          <span class="chip">HTML/CSS</span><span class="chip">Figma</span><span class="chip">UI/UX Design</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- WORK 05 -->
+    <div class="work-item">
+      <div class="work-media">
+        <img src="３.png" alt="WORK 05">
+      </div>
+      <div>
+        <div class="wnum">WORK 05</div>
+        <h3>レストランご提案用サイト</h3>
+        <p>
+          料理の世界観や店舗の雰囲気を伝える、飲食店向けのデザインプロトタイプ。メニューの閲覧性やオンライン予約へのスムーズな接続を意識した構成。
+        </p>
+        <div class="stack">
+          <span class="chip">HTML/CSS</span><span class="chip">UI/UX Design</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- WORK 06 -->
+    <div class="work-item">
+      <div class="work-media">
+        <img src="４.png" alt="WORK 06">
+      </div>
+      <div>
+        <div class="wnum">WORK 06</div>
+        <h3>ブライダルご提案用サイト</h3>
+        <p>
+          エレガントかつ洗練された世界観で特別な一日をプロデュースする、ブライダル事業者向けWebデザイン。ビジュアル重視の構成と見学予約導線。
+        </p>
+        <div class="stack">
+          <span class="chip">HTML/CSS</span><span class="chip">UI/UX Design</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- WORK 07 -->
+    <div class="work-item">
+      <div class="work-media">
+        <img src="5.png" alt="WORK 07"
+             onerror="this.onerror=(function(){this.replaceWith(Object.assign(document.createElement('div'),{className:'media-fallback',textContent:'画像を読み込めません（5.png / ５.png をご確認ください）'}));});this.src='５.png';">
+      </div>
+      <div>
+        <div class="wnum">WORK 07</div>
+        <h3>ATLAS TO PARADISE トップページ — 3D AIナビゲーター</h3>
+        <p>
+          Three.jsで構築したフルスクリーン3Dロケット演出。打ち上げ→大気圏離脱→地球周回まで、パーティクル(炎・煙・宇宙塵)と流れ星をリアルタイム物理でアニメーション。多言語(JP/EN/ZH)AIチャット窓口とGoogle OAuthログインゲート、Cloudflare Worker経由のAPIキー保護・利用制限も統合した、最新3D×AIの統合フロントエンド。
+          <a href="index.html">詳細を見る (index.html)</a>
+        </p>
+        <div class="stack">
+          <span class="chip">Three.js</span><span class="chip">WebGL Particles</span><span class="chip">AI Chat UI</span><span class="chip">Google OAuth</span><span class="chip">Cloudflare Workers</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-num mono">03 / ABOUT</div>
+      <h2>自己紹介</h2>
+    </div>
+    <div class="about-grid">
+      <div>
+        <p>冬は東南アジア・東アジアを拠点に、春夏は日本でバンライフをしながら活動する、旅するWebマーケター兼クリエイター。6年間、フルリモートでの独立稼働を続けています。</p>
+        <p>軸にしているのは「墨と余白」— 引き算の美意識。派手な装飾より、伝えるべき情報が伝わる設計を優先します。マーケティングの数値分析と、フロントエンド実装の両方を自分の手で行えることが強みです。</p>
+      </div>
+      <div>
+        <div class="section-num mono" style="margin-bottom:14px;">TOOLBOX</div>
+        <div class="toolbox">
+          <span class="chip">GA4</span><span class="chip">Search Console</span><span class="chip">Figma</span>
+          <span class="chip">Notion</span><span class="chip">ラッコキーワード</span><span class="chip">Python</span>
+          <span class="chip">Three.js</span><span class="chip">D3.js</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="price">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-num mono">04 / PRICE</div>
+      <h2>支援メニューの目安</h2>
+    </div>
+    <div class="price-grid">
+      <div class="price-card">
+        <div class="name">SEO現状分析レポート</div>
+        <div class="amount">¥30,000〜</div>
+        <div class="desc">現状の課題を洗い出し、優先度付きで改善提案します。</div>
+      </div>
+      <div class="price-card">
+        <div class="name">LP構成案作成</div>
+        <div class="amount">¥50,000〜</div>
+        <div class="desc">導線設計からワイヤーフレームまで作成します。</div>
+      </div>
+      <div class="price-card">
+        <div class="name">SNS運用代行</div>
+        <div class="amount">¥50,000〜/月</div>
+        <div class="desc">投稿設計・分析・改善サイクルを継続的に回します。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-num mono">05 / FAQ</div>
+      <h2>よくある質問</h2>
+    </div>
+    <div class="faq-item">
+      <div class="q"><span>Q.</span>予算が少なくても相談できますか？</div>
+      <div class="a">はい。まずは無料相談で状況をお聞きし、予算に合う進め方を一緒に考えます。</div>
+    </div>
+    <div class="faq-item">
+      <div class="q"><span>Q.</span>継続契約は必須ですか？</div>
+      <div class="a">単発のご依頼も対応可能です。まずはスポットでご相談いただくケースも多いです。</div>
+    </div>
+    <div class="faq-item">
+      <div class="q"><span>Q.</span>海外在住でもやり取りは問題ないですか？</div>
+      <div class="a">フルリモートでの稼働が前提のため、オンラインでのやり取りに慣れています。時差のみ事前にご相談ください。</div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" style="border-bottom:none;">
+  <div class="wrap">
+    <div class="contact-box">
+      <h2>まずは無料でご相談ください</h2>
+      <p>貴社サイトのURLを送っていただければ、ファーストビューの簡易診断を無料でお返しします。</p>
+      <a href="index.html" class="btn btn-primary">AIナビゲーターで相談を始める</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap mono">ATLAS TO PARADISE — 楽園への古地図 © 2026 HATTORI</div>
+</footer>
+
+</body>
+</html>
