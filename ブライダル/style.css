@@ -1,0 +1,16 @@
+/* 【課題1・2】ボタンの挙動調整 */
+.submitBtn {
+  padding-left: 20px;
+  transition: transform 0.3s ease;
+}
+
+.submitBtn:hover {
+  transform: translateX(20px);
+}
+
+/* 【課題3】崩れ防止 */
+@media screen and (max-width: 1240px) {
+  body {
+    overflow-x: hidden;
+  }
+}
