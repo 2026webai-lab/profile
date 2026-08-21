@@ -38,6 +38,12 @@
   .back-link{font-size:0.78rem;color:var(--text-dim);text-decoration:none;border:1px solid var(--line);
      padding:7px 14px;border-radius:20px;transition:all .2s;}
   .back-link:hover{color:var(--accent);border-color:var(--accent);}
+  .lang-switch{display:flex;border:1px solid var(--line);border-radius:20px;overflow:hidden;}
+  .lang-btn{font-family:'JetBrains Mono',monospace;font-size:0.72rem;letter-spacing:0.05em;
+     background:transparent;color:var(--text-dim);border:none;padding:7px 14px;cursor:pointer;
+     transition:all .2s;}
+  .lang-btn.active{background:var(--accent);color:#04140f;font-weight:700;}
+  .lang-btn:not(.active):hover{color:var(--accent);}
 
   /* hero */
   .hero{padding:96px 0 64px;border-bottom:1px solid var(--line);position:relative;overflow:hidden;}
@@ -64,14 +70,22 @@
 
   /* can-do */
   .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
-  .skill-card{background:var(--surface);border:1px solid var(--line);border-radius:4px;padding:24px;position:relative;}
-  .skill-card::before,.skill-card::after{content:"";position:absolute;width:10px;height:10px;
-     border:1px solid var(--accent);opacity:0.6;}
-  .skill-card::before{top:-1px;left:-1px;border-right:none;border-bottom:none;}
-  .skill-card::after{bottom:-1px;right:-1px;border-left:none;border-top:none;}
-  .skill-card .tag{font-size:0.68rem;color:var(--accent);letter-spacing:0.1em;margin-bottom:10px;}
-  .skill-card h3{font-size:1rem;font-weight:700;margin-bottom:10px;}
-  .skill-card p{font-size:0.82rem;color:var(--text-dim);}
+  .skill-card{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:26px;
+     position:relative;overflow:hidden;transition:transform .35s ease,border-color .35s ease,box-shadow .35s ease;}
+  .skill-card::before{content:"";position:absolute;inset:0;border-radius:6px;padding:1px;
+     background:linear-gradient(135deg,var(--accent),transparent 40%,transparent 60%,var(--accent));
+     -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+     -webkit-mask-composite:xor;mask-composite:exclude;opacity:0;transition:opacity .35s ease;pointer-events:none;}
+  .skill-card::after{content:"";position:absolute;top:-40%;right:-40%;width:140px;height:140px;
+     background:radial-gradient(circle,var(--accent-dim) 0%,transparent 70%);opacity:0;transition:opacity .35s ease;}
+  .skill-card:hover{transform:translateY(-4px);border-color:transparent;
+     box-shadow:0 16px 40px -12px rgba(0,255,204,0.25);}
+  .skill-card:hover::before,.skill-card:hover::after{opacity:1;}
+  .skill-card .tag{font-size:0.68rem;color:var(--accent);letter-spacing:0.1em;margin-bottom:12px;
+     display:inline-block;padding:3px 10px;border:1px solid var(--line);border-radius:100px;
+     position:relative;z-index:1;}
+  .skill-card h3{font-size:1rem;font-weight:700;margin-bottom:10px;position:relative;z-index:1;}
+  .skill-card p{font-size:0.82rem;color:var(--text-dim);position:relative;z-index:1;line-height:1.7;}
 
   /* works */
   .work-item{display:grid;grid-template-columns:280px 1fr;gap:28px;padding:32px 0;border-bottom:1px solid var(--line);align-items:start;}
@@ -93,6 +107,21 @@
   .about-grid{display:grid;grid-template-columns:1.1fr 0.9fr;gap:48px;align-items:start;}
   .about-grid p{font-size:0.9rem;color:var(--text-dim);margin-bottom:16px;}
   .toolbox{display:flex;flex-wrap:wrap;gap:8px;}
+  .toolbox .chip{transition:transform .25s ease,border-color .25s ease,color .25s ease;}
+  .toolbox .chip:hover{transform:translateY(-2px);border-color:var(--accent);color:var(--accent);}
+
+  .about-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);
+     border:1px solid var(--line);border-radius:8px;overflow:hidden;margin-bottom:28px;}
+  .about-stat{background:var(--surface);padding:20px 16px;text-align:center;}
+  .about-stat .num{font-family:'Space Grotesk',sans-serif;font-size:1.6rem;font-weight:700;color:var(--accent);
+     line-height:1;margin-bottom:6px;}
+  .about-stat .lbl{font-size:0.68rem;color:var(--text-dim);letter-spacing:0.05em;}
+
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease;}
+  .reveal.is-visible{opacity:1;transform:translateY(0);}
+
+  /* impact */
+  .impact-lead{font-size:0.92rem;color:var(--text-dim);max-width:640px;margin-bottom:36px;line-height:1.9;}
 
   /* price */
   .price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
@@ -129,18 +158,24 @@
 <nav>
   <div class="wrap">
     <a href="index.html" class="brand">ATLAS TO PARADISE</a>
-    <a href="index.html" class="back-link">← AIナビゲーターに戻る</a>
+    <div style="display:flex;align-items:center;gap:10px;">
+      <div class="lang-switch">
+        <button class="lang-btn active" data-lang="ja">JA</button>
+        <button class="lang-btn" data-lang="en">EN</button>
+      </div>
+      <a href="index.html" class="back-link" data-i18n="backLink">← AIナビゲーターに戻る</a>
+    </div>
   </div>
 </nav>
 
 <header class="hero">
   <div class="wrap">
-    <div class="eyebrow">HATTORI — WEB MARKETER / CREATOR</div>
-    <h1>データと美意識で、<br>事業の<span>伸びしろ</span>を形にする。</h1>
-    <p>6年間、旅をしながら独立稼働してきたWebマーケター。SEO・SNS運用・LP改善・AI活用を、分析力と実装力の両輪で支援します。</p>
+    <div class="eyebrow" data-i18n="heroEyebrow">HATTORI — WEB MARKETER / CREATOR</div>
+    <h1 data-i18n-html="heroH1">データと美意識で、<br>事業の<span>伸びしろ</span>を形にする。</h1>
+    <p data-i18n="heroP">6年間、旅をしながら独立稼働してきたWebマーケター。SEO・SNS運用・LP改善・AI活用を、分析力と実装力の両輪で支援します。</p>
     <div class="hero-ctas">
-      <a href="index.html" class="btn btn-primary">AIに無料相談する</a>
-      <a href="#works" class="btn btn-ghost">実績を見る</a>
+      <a href="index.html" class="btn btn-primary" data-i18n="heroCta1">AIに無料相談する</a>
+      <a href="#works" class="btn btn-ghost" data-i18n="heroCta2">実績を見る</a>
     </div>
   </div>
 </header>
@@ -149,38 +184,38 @@
   <div class="wrap">
     <div class="section-head">
       <div class="section-num mono">01 / CAN DO</div>
-      <h2>提供できること</h2>
+      <h2 data-i18n="candooTitle">提供できること</h2>
     </div>
     <div class="grid-3">
       <div class="skill-card">
         <div class="tag mono">SEO</div>
-        <h3>SEOブログ戦略</h3>
-        <p>キーワード選定、競合分析、リライト構成案の作成まで一気通貫で支援します。</p>
+        <h3 data-i18n="skill1h">SEOブログ戦略</h3>
+        <p data-i18n="skill1p">「検索されない」を終わらせる。キーワード選定から競合分析、リライト構成案まで一気通貫。実際にアクセスが伸びた設計思想をそのまま提供します。</p>
       </div>
       <div class="skill-card">
         <div class="tag mono">LP / WEB</div>
-        <h3>LP・Web改善</h3>
-        <p>ユーザー導線(FV/CTA)の分析とワイヤーフレーム作成(Figma)で成約率を底上げします。</p>
+        <h3 data-i18n="skill2h">LP・Web改善</h3>
+        <p data-i18n="skill2p">アクセスはあるのに成果が出ない、その原因を数値で特定。ユーザー導線(FV/CTA)を再設計し、Figmaでのワイヤーフレーム作成まで一貫対応します。</p>
       </div>
       <div class="skill-card">
         <div class="tag mono">SNS</div>
-        <h3>SNS運用代行</h3>
-        <p>投稿設計から分析まで、Instagram運用の実践知見をもとに継続的に改善します。</p>
+        <h3 data-i18n="skill3h">SNS運用代行</h3>
+        <p data-i18n="skill3p">フォロワーではなく、届く投稿を。Instagram実運用で培った設計・分析ノウハウをもとに、継続的に伸びる仕組みを構築します。</p>
       </div>
       <div class="skill-card">
         <div class="tag mono">AI</div>
-        <h3>AIコンサルティング</h3>
-        <p>業務のどこにAIを組み込めるか、実装まで含めて具体的に提案します。</p>
+        <h3 data-i18n="skill4h">AIコンサルティング</h3>
+        <p data-i18n="skill4p">「AIを使いたいが何から」に答えます。業務のどこに組み込めば効果が出るかを見極め、実装まで自分の手で仕上げます。</p>
       </div>
       <div class="skill-card">
         <div class="tag mono">JP ⇄</div>
-        <h3>ネイティブ日本語翻訳</h3>
-        <p>自然な日本語表現でのローカライズ、日本語コーチングにも対応します。</p>
+        <h3 data-i18n="skill5h">ネイティブ日本語翻訳</h3>
+        <p data-i18n="skill5p">翻訳臭さのない、自然な日本語に。ローカライズと日本語コーチングの両面から、伝わる言葉に仕上げます。</p>
       </div>
       <div class="skill-card">
         <div class="tag mono">DEV</div>
-        <h3>フロントエンド実装</h3>
-        <p>HTML/CSS/JS、Python(画像処理・データ処理)による高度な作品制作も自力で行います。</p>
+        <h3 data-i18n="skill6h">フロントエンド実装</h3>
+        <p data-i18n="skill6p">アイデアを形にするまで、外注ゼロ。HTML/CSS/JS、Python(画像処理・データ処理)を用いた高度な演出・作品制作も自力で完結します。</p>
       </div>
     </div>
   </div>
@@ -190,7 +225,7 @@
   <div class="wrap">
     <div class="section-head">
       <div class="section-num mono">02 / WORKS</div>
-      <h2>実績・制作事例</h2>
+      <h2 data-i18n="worksTitle">実績・制作事例</h2>
     </div>
 
     <!-- WORK 01 -->
@@ -201,8 +236,8 @@
       </div>
       <div>
         <div class="wnum">WORK 01</div>
-        <h3>書道スクロールサイト</h3>
-        <p>
+        <h3 data-i18n="w1h">書道スクロールサイト</h3>
+        <p data-i18n-html="w1p">
           Python画像処理(scikit-image, OpenCV, NetworkX)で実際の墨の中心線を出し、正しい筆順でSVGアニメーションとして再現した書道スクロールサイト。
           <a href="書道.html">詳細を見る (書道.html)</a>
         </p>
@@ -219,8 +254,8 @@
       </div>
       <div>
         <div class="wnum">WORK 02</div>
-        <h3>Wandering Ledger — バンライフ 会計士の冒険記</h3>
-        <p>
+        <h3 data-i18n="w2h">Wandering Ledger — バンライフ 会計士の冒険記</h3>
+        <p data-i18n-html="w2p">
           ダークパレット×アンバーアクセントのバンライフ物語マガジンサイト。モーフィングするヒーローテキストと、複数エピソードの交互レイアウトで構成。
           <a href="van.html">詳細を見る (van.html)</a>
         </p>
@@ -237,8 +272,8 @@
       </div>
       <div>
         <div class="wnum">WORK 03</div>
-        <h3>Taichung Travel Prototype</h3>
-        <p>
+        <h3 data-i18n="w3h">Taichung Travel Prototype</h3>
+        <p data-i18n-html="w3p">
           台中の視覚モックアップを、モーダル表示・レスポンシブ対応込みで完全コーディング。大容量base64アセットの安定した扱い方も確立。
           <a href="taiwan.html">詳細を見る (taiwan.html)</a>
         </p>
@@ -255,9 +290,10 @@
       </div>
       <div>
         <div class="wnum">WORK 04</div>
-        <h3>リフォーム会社のご提案用サイト</h3>
-        <p>
+        <h3 data-i18n="w4h">リフォーム会社のご提案用サイト</h3>
+        <p data-i18n-html="w4p">
           住まいの刷新や改修事例を魅力的に伝えるリフォーム事業者向けのデザインプロトタイプ。見やすさと見積もり・相談導線を両立したレイアウト設計。
+          <a href="リフォーム.html">詳細を見る (リフォーム.html)</a>
         </p>
         <div class="stack">
           <span class="chip">HTML/CSS</span><span class="chip">Figma</span><span class="chip">UI/UX Design</span>
@@ -272,9 +308,10 @@
       </div>
       <div>
         <div class="wnum">WORK 05</div>
-        <h3>レストランご提案用サイト</h3>
-        <p>
+        <h3 data-i18n="w5h">レストランご提案用サイト</h3>
+        <p data-i18n-html="w5p">
           料理の世界観や店舗の雰囲気を伝える、飲食店向けのデザインプロトタイプ。メニューの閲覧性やオンライン予約へのスムーズな接続を意識した構成。
+          <a href="レストラン.html">詳細を見る (レストラン.html)</a>
         </p>
         <div class="stack">
           <span class="chip">HTML/CSS</span><span class="chip">UI/UX Design</span>
@@ -289,9 +326,10 @@
       </div>
       <div>
         <div class="wnum">WORK 06</div>
-        <h3>ブライダルご提案用サイト</h3>
-        <p>
+        <h3 data-i18n="w6h">ブライダルご提案用サイト</h3>
+        <p data-i18n-html="w6p">
           エレガントかつ洗練された世界観で特別な一日をプロデュースする、ブライダル事業者向けWebデザイン。ビジュアル重視の構成と見学予約導線。
+          <a href="ブライダル.html">詳細を見る (ブライダル.html)</a>
         </p>
         <div class="stack">
           <span class="chip">HTML/CSS</span><span class="chip">UI/UX Design</span>
@@ -307,8 +345,8 @@
       </div>
       <div>
         <div class="wnum">WORK 07</div>
-        <h3>ATLAS TO PARADISE トップページ — 3D AIナビゲーター</h3>
-        <p>
+        <h3 data-i18n="w7h">ATLAS TO PARADISE トップページ — 3D AIナビゲーター</h3>
+        <p data-i18n-html="w7p">
           Three.jsで構築したフルスクリーン3Dロケット演出。打ち上げ→大気圏離脱→地球周回まで、パーティクル(炎・煙・宇宙塵)と流れ星をリアルタイム物理でアニメーション。多言語(JP/EN/ZH)AIチャット窓口とGoogle OAuthログインゲート、Cloudflare Worker経由のAPIキー保護・利用制限も統合した、最新3D×AIの統合フロントエンド。
           <a href="index.html">詳細を見る (index.html)</a>
         </p>
@@ -325,14 +363,19 @@
   <div class="wrap">
     <div class="section-head">
       <div class="section-num mono">03 / ABOUT</div>
-      <h2>自己紹介</h2>
+      <h2 data-i18n="aboutTitle">自己紹介</h2>
+    </div>
+    <div class="about-stats reveal">
+      <div class="about-stat"><div class="num">6+</div><div class="lbl">YEARS REMOTE</div></div>
+      <div class="about-stat"><div class="num">13</div><div class="lbl">COUNTRIES</div></div>
+      <div class="about-stat"><div class="num">15+</div><div class="lbl">CLIENTS</div></div>
     </div>
     <div class="about-grid">
-      <div>
-        <p>冬は東南アジア・東アジアを拠点に、春夏は日本でバンライフをしながら活動する、旅するWebマーケター兼クリエイター。6年間、フルリモートでの独立稼働を続けています。</p>
-        <p>軸にしているのは「墨と余白」— 引き算の美意識。派手な装飾より、伝えるべき情報が伝わる設計を優先します。マーケティングの数値分析と、フロントエンド実装の両方を自分の手で行えることが強みです。</p>
+      <div class="reveal">
+        <p data-i18n="aboutP1">冬は東南アジア・東アジアを拠点に、春夏は日本でバンライフをしながら活動する、旅するWebマーケター兼クリエイター。6年間、フルリモートでの独立稼働を続けています。</p>
+        <p data-i18n="aboutP2">軸にしているのは「墨と余白」— 引き算の美意識。派手な装飾より、伝えるべき情報が伝わる設計を優先します。マーケティングの数値分析と、Three.js/D3.jsを用いたフロントエンド実装の両方を自分の手で行えることが強みです。</p>
       </div>
-      <div>
+      <div class="reveal">
         <div class="section-num mono" style="margin-bottom:14px;">TOOLBOX</div>
         <div class="toolbox">
           <span class="chip">GA4</span><span class="chip">Search Console</span><span class="chip">Figma</span>
@@ -344,27 +387,54 @@
   </div>
 </section>
 
+<section id="impact">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-num mono">04 / IMPACT</div>
+      <h2 data-i18n="impactTitle">社会的意義</h2>
+    </div>
+    <p class="impact-lead reveal" data-i18n="impactLead">Webの力は、都市部の大企業だけのものではない。旅先で出会う地方の小さな事業者にこそ、正しく届けば売上と雇用が生まれる余地がある。だからこそ、専門知識を独り占めせず、現場に還元することを大切にしています。</p>
+    <div class="grid-3">
+      <div class="skill-card reveal">
+        <div class="tag mono">LOCAL</div>
+        <h3 data-i18n="impact1h">地方・中小事業者の売上を、正しく伸ばす</h3>
+        <p data-i18n="impact1p">情報発信力の弱さで埋もれていた地方の店舗・事業者を、SEOとSNS設計で本来届くべき顧客に届ける。地域経済に人とお金が循環する仕組みづくりに貢献します。</p>
+      </div>
+      <div class="skill-card reveal">
+        <div class="tag mono">CULTURE</div>
+        <h3 data-i18n="impact2h">日本文化を、次の世代・海外へつなぐ</h3>
+        <p data-i18n="impact2p">書道など、失われつつある日本の技術・美意識をデジタル技術で記録・再構築。ネイティブ翻訳と組み合わせ、国内外へ正しく、美しく伝えます。</p>
+      </div>
+      <div class="skill-card reveal">
+        <div class="tag mono">ACCESS</div>
+        <h3 data-i18n="impact3h">AIを、専門家だけのものにしない</h3>
+        <p data-i18n="impact3p">「AIは難しそう」で足踏みする個人・小規模事業者に、実務目線でAI活用を翻訳して届ける。技術格差を、機会格差にしないための伴走を続けます。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section id="price">
   <div class="wrap">
     <div class="section-head">
-      <div class="section-num mono">04 / PRICE</div>
-      <h2>支援メニューの目安</h2>
+      <div class="section-num mono">05 / PRICE</div>
+      <h2 data-i18n="priceTitle">支援メニューの目安</h2>
     </div>
     <div class="price-grid">
       <div class="price-card">
-        <div class="name">SEO現状分析レポート</div>
+        <div class="name" data-i18n="price1n">SEO現状分析レポート</div>
         <div class="amount">¥30,000〜</div>
-        <div class="desc">現状の課題を洗い出し、優先度付きで改善提案します。</div>
+        <div class="desc" data-i18n="price1d">現状の課題を洗い出し、優先度付きで改善提案します。</div>
       </div>
       <div class="price-card">
-        <div class="name">LP構成案作成</div>
+        <div class="name" data-i18n="price2n">LP構成案作成</div>
         <div class="amount">¥50,000〜</div>
-        <div class="desc">導線設計からワイヤーフレームまで作成します。</div>
+        <div class="desc" data-i18n="price2d">導線設計からワイヤーフレームまで作成します。</div>
       </div>
       <div class="price-card">
-        <div class="name">SNS運用代行</div>
-        <div class="amount">¥50,000〜/月</div>
-        <div class="desc">投稿設計・分析・改善サイクルを継続的に回します。</div>
+        <div class="name" data-i18n="price3n">SNS運用代行</div>
+        <div class="amount" data-i18n="price3amt">¥50,000〜/月</div>
+        <div class="desc" data-i18n="price3d">投稿設計・分析・改善サイクルを継続的に回します。</div>
       </div>
     </div>
   </div>
@@ -373,20 +443,20 @@
 <section id="faq">
   <div class="wrap">
     <div class="section-head">
-      <div class="section-num mono">05 / FAQ</div>
-      <h2>よくある質問</h2>
+      <div class="section-num mono">06 / FAQ</div>
+      <h2 data-i18n="faqTitle">よくある質問</h2>
     </div>
     <div class="faq-item">
-      <div class="q"><span>Q.</span>予算が少なくても相談できますか？</div>
-      <div class="a">はい。まずは無料相談で状況をお聞きし、予算に合う進め方を一緒に考えます。</div>
+      <div class="q"><span>Q.</span><span data-i18n="faq1q">予算が少なくても相談できますか？</span></div>
+      <div class="a" data-i18n="faq1a">はい。まずは無料相談で状況をお聞きし、予算に合う進め方を一緒に考えます。</div>
     </div>
     <div class="faq-item">
-      <div class="q"><span>Q.</span>継続契約は必須ですか？</div>
-      <div class="a">単発のご依頼も対応可能です。まずはスポットでご相談いただくケースも多いです。</div>
+      <div class="q"><span>Q.</span><span data-i18n="faq2q">継続契約は必須ですか？</span></div>
+      <div class="a" data-i18n="faq2a">単発のご依頼も対応可能です。まずはスポットでご相談いただくケースも多いです。</div>
     </div>
     <div class="faq-item">
-      <div class="q"><span>Q.</span>海外在住でもやり取りは問題ないですか？</div>
-      <div class="a">フルリモートでの稼働が前提のため、オンラインでのやり取りに慣れています。時差のみ事前にご相談ください。</div>
+      <div class="q"><span>Q.</span><span data-i18n="faq3q">海外在住でもやり取りは問題ないですか？</span></div>
+      <div class="a" data-i18n="faq3a">フルリモートでの稼働が前提のため、オンラインでのやり取りに慣れています。時差のみ事前にご相談ください。</div>
     </div>
   </div>
 </section>
@@ -394,9 +464,9 @@
 <section id="contact" style="border-bottom:none;">
   <div class="wrap">
     <div class="contact-box">
-      <h2>まずは無料でご相談ください</h2>
-      <p>貴社サイトのURLを送っていただければ、ファーストビューの簡易診断を無料でお返しします。</p>
-      <a href="index.html" class="btn btn-primary">AIナビゲーターで相談を始める</a>
+      <h2 data-i18n="contactTitle">まずは無料でご相談ください</h2>
+      <p data-i18n="contactP">貴社サイトのURLを送っていただければ、ファーストビューの簡易診断を無料でお返しします。</p>
+      <a href="index.html" class="btn btn-primary" data-i18n="contactCta">AIナビゲーターで相談を始める</a>
     </div>
   </div>
 </section>
@@ -405,5 +475,166 @@
   <div class="wrap mono">ATLAS TO PARADISE — 楽園への古地図 © 2026 HATTORI</div>
 </footer>
 
+<script>
+const I18N = {
+  ja:{
+    backLink:"← AIナビゲーターに戻る",
+    heroEyebrow:"HATTORI — WEB MARKETER / CREATOR",
+    heroH1:"データと美意識で、<br>事業の<span>伸びしろ</span>を形にする。",
+    heroP:"6年間、旅をしながら独立稼働してきたWebマーケター。SEO・SNS運用・LP改善・AI活用を、分析力と実装力の両輪で支援します。",
+    heroCta1:"AIに無料相談する",
+    heroCta2:"実績を見る",
+    candooTitle:"提供できること",
+    skill1h:"SEOブログ戦略",
+    skill1p:"「検索されない」を終わらせる。キーワード選定から競合分析、リライト構成案まで一気通貫。実際にアクセスが伸びた設計思想をそのまま提供します。",
+    skill2h:"LP・Web改善",
+    skill2p:"アクセスはあるのに成果が出ない、その原因を数値で特定。ユーザー導線(FV/CTA)を再設計し、Figmaでのワイヤーフレーム作成まで一貫対応します。",
+    skill3h:"SNS運用代行",
+    skill3p:"フォロワーではなく、届く投稿を。Instagram実運用で培った設計・分析ノウハウをもとに、継続的に伸びる仕組みを構築します。",
+    skill4h:"AIコンサルティング",
+    skill4p:"「AIを使いたいが何から」に答えます。業務のどこに組み込めば効果が出るかを見極め、実装まで自分の手で仕上げます。",
+    skill5h:"ネイティブ日本語翻訳",
+    skill5p:"翻訳臭さのない、自然な日本語に。ローカライズと日本語コーチングの両面から、伝わる言葉に仕上げます。",
+    skill6h:"フロントエンド実装",
+    skill6p:"アイデアを形にするまで、外注ゼロ。HTML/CSS/JS、Python(画像処理・データ処理)を用いた高度な演出・作品制作も自力で完結します。",
+    worksTitle:"実績・制作事例",
+    w1h:"書道スクロールサイト",
+    w1p:'Python画像処理(scikit-image, OpenCV, NetworkX)で実際の墨の中心線を出し、正しい筆順でSVGアニメーションとして再現した書道スクロールサイト。<a href="書道.html">詳細を見る (書道.html)</a>',
+    w2h:"Wandering Ledger — バンライフ 会計士の冒険記",
+    w2p:'ダークパレット×アンバーアクセントのバンライフ物語マガジンサイト。モーフィングするヒーローテキストと、複数エピソードの交互レイアウトで構成。<a href="van.html">詳細を見る (van.html)</a>',
+    w3h:"Taichung Travel Prototype",
+    w3p:'台中の視覚モックアップを、モーダル表示・レスポンシブ対応込みで完全コーディング。大容量base64アセットの安定した扱い方も確立。<a href="taiwan.html">詳細を見る (taiwan.html)</a>',
+    w4h:"リフォーム会社のご提案用サイト",
+    w4p:'住まいの刷新や改修事例を魅力的に伝えるリフォーム事業者向けのデザインプロトタイプ。見やすさと見積もり・相談導線を両立したレイアウト設計。<a href="リフォーム.html">詳細を見る (リフォーム.html)</a>',
+    w5h:"レストランご提案用サイト",
+    w5p:'料理の世界観や店舗の雰囲気を伝える、飲食店向けのデザインプロトタイプ。メニューの閲覧性やオンライン予約へのスムーズな接続を意識した構成。<a href="レストラン.html">詳細を見る (レストラン.html)</a>',
+    w6h:"ブライダルご提案用サイト",
+    w6p:'エレガントかつ洗練された世界観で特別な一日をプロデュースする、ブライダル事業者向けWebデザイン。ビジュアル重視の構成と見学予約導線。<a href="ブライダル.html">詳細を見る (ブライダル.html)</a>',
+    w7h:"ATLAS TO PARADISE トップページ — 3D AIナビゲーター",
+    w7p:'Three.jsで構築したフルスクリーン3Dロケット演出。打ち上げ→大気圏離脱→地球周回まで、パーティクル(炎・煙・宇宙塵)と流れ星をリアルタイム物理でアニメーション。多言語(JP/EN/ZH)AIチャット窓口とGoogle OAuthログインゲート、Cloudflare Worker経由のAPIキー保護・利用制限も統合した、最新3D×AIの統合フロントエンド。<a href="index.html">詳細を見る (index.html)</a>',
+    aboutTitle:"自己紹介",
+    aboutP1:"冬は東南アジア・東アジアを拠点に、春夏は日本でバンライフをしながら活動する、旅するWebマーケター兼クリエイター。6年間、フルリモートでの独立稼働を続けています。",
+    aboutP2:"軸にしているのは「墨と余白」— 引き算の美意識。派手な装飾より、伝えるべき情報が伝わる設計を優先します。マーケティングの数値分析と、Three.js/D3.jsを用いたフロントエンド実装の両方を自分の手で行えることが強みです。",
+    impactTitle:"社会的意義",
+    impactLead:"Webの力は、都市部の大企業だけのものではない。旅先で出会う地方の小さな事業者にこそ、正しく届けば売上と雇用が生まれる余地がある。だからこそ、専門知識を独り占めせず、現場に還元することを大切にしています。",
+    impact1h:"地方・中小事業者の売上を、正しく伸ばす",
+    impact1p:"情報発信力の弱さで埋もれていた地方の店舗・事業者を、SEOとSNS設計で本来届くべき顧客に届ける。地域経済に人とお金が循環する仕組みづくりに貢献します。",
+    impact2h:"日本文化を、次の世代・海外へつなぐ",
+    impact2p:"書道など、失われつつある日本の技術・美意識をデジタル技術で記録・再構築。ネイティブ翻訳と組み合わせ、国内外へ正しく、美しく伝えます。",
+    impact3h:"AIを、専門家だけのものにしない",
+    impact3p:"「AIは難しそう」で足踏みする個人・小規模事業者に、実務目線でAI活用を翻訳して届ける。技術格差を、機会格差にしないための伴走を続けます。",
+    priceTitle:"支援メニューの目安",
+    price1n:"SEO現状分析レポート", price1d:"現状の課題を洗い出し、優先度付きで改善提案します。",
+    price2n:"LP構成案作成", price2d:"導線設計からワイヤーフレームまで作成します。",
+    price3n:"SNS運用代行", price3d:"投稿設計・分析・改善サイクルを継続的に回します。", price3amt:"¥50,000〜/月",
+    faqTitle:"よくある質問",
+    faq1q:"予算が少なくても相談できますか？", faq1a:"はい。まずは無料相談で状況をお聞きし、予算に合う進め方を一緒に考えます。",
+    faq2q:"継続契約は必須ですか？", faq2a:"単発のご依頼も対応可能です。まずはスポットでご相談いただくケースも多いです。",
+    faq3q:"海外在住でもやり取りは問題ないですか？", faq3a:"フルリモートでの稼働が前提のため、オンラインでのやり取りに慣れています。時差のみ事前にご相談ください。",
+    contactTitle:"まずは無料でご相談ください",
+    contactP:"貴社サイトのURLを送っていただければ、ファーストビューの簡易診断を無料でお返しします。",
+    contactCta:"AIナビゲーターで相談を始める"
+  },
+  en:{
+    backLink:"← Back to AI Navigator",
+    heroEyebrow:"HATTORI — WEB MARKETER / CREATOR",
+    heroH1:"Turning data and craft<br>into <span>growth</span> for your business.",
+    heroP:"A web marketer who has worked fully remote while traveling for 6 years. Supporting SEO, SNS management, LP improvement, and AI adoption with both analysis and hands-on implementation.",
+    heroCta1:"Talk to the AI for free",
+    heroCta2:"View works",
+    candooTitle:"What I Offer",
+    skill1h:"SEO Blog Strategy",
+    skill1p:"End the cycle of being unseen in search. From keyword research to competitor analysis and rewrite planning — a full pipeline built on strategies that actually moved traffic.",
+    skill2h:"LP / Web Improvement",
+    skill2p:"Traffic without conversions has a cause — I find it with data. Redesigning user flow (FV/CTA) through to wireframing in Figma, end to end.",
+    skill3h:"SNS Management",
+    skill3p:"Not just followers — posts that actually reach people. Built on hands-on Instagram operation experience, with a system for continuous improvement.",
+    skill4h:"AI Consulting",
+    skill4p:"For 'I want to use AI but don't know where to start' — I identify where it moves the needle in your operations and implement it myself.",
+    skill5h:"Native Japanese Translation",
+    skill5p:"Natural Japanese that doesn't read as translated. Localization and Japanese coaching, refined into language that actually connects.",
+    skill6h:"Frontend Development",
+    skill6p:"From idea to finished product, zero outsourcing. Advanced production with HTML/CSS/JS and Python (image & data processing), all handled in-house.",
+    worksTitle:"Works",
+    w1h:"Calligraphy Scroll Site",
+    w1p:'A calligraphy scroll site that extracts the actual ink centerline via Python image processing (scikit-image, OpenCV, NetworkX) and replays it as an SVG animation in authentic stroke order. <a href="書道.html">View details (書道.html)</a>',
+    w2h:"Wandering Ledger — A Van-Life Accountant\'s Journey",
+    w2p:'A van-life story magazine site in a dark palette with amber accents, featuring morphing hero text and alternating layouts across multiple episodes. <a href="van.html">View details (van.html)</a>',
+    w3h:"Taichung Travel Prototype",
+    w3p:'A pixel-faithful build of Taichung travel visual mockups, complete with modal dialogs and full responsive support. Established a stable approach for handling large base64-embedded assets. <a href="taiwan.html">View details (taiwan.html)</a>',
+    w4h:"Renovation Company Proposal Site",
+    w4p:'A design prototype for renovation businesses that showcases refurbishment case studies. Layout balances visual appeal with clear quote/consultation flows. <a href="リフォーム.html">View details (リフォーム.html)</a>',
+    w5h:"Restaurant Proposal Site",
+    w5p:'A design prototype for restaurants that conveys the cuisine\'s world and atmosphere. Built for easy menu browsing and a smooth path to online reservations. <a href="レストラン.html">View details (レストラン.html)</a>',
+    w6h:"Bridal Proposal Site",
+    w6p:'An elegant, refined web design for bridal businesses producing a couple\'s special day. Visual-first layout with a clear venue-tour booking flow. <a href="ブライダル.html">View details (ブライダル.html)</a>',
+    w7h:"ATLAS TO PARADISE Top Page — 3D AI Navigator",
+    w7p:'A fullscreen 3D rocket sequence built with Three.js — launch, atmospheric exit, orbit — animated in real time with particle effects (fire, smoke, stardust) and shooting stars. Integrates a multilingual (JP/EN/ZH) AI chat desk, a Google OAuth login gate, and API key protection/rate limiting via Cloudflare Workers. <a href="index.html">View details (index.html)</a>',
+    aboutTitle:"About",
+    aboutP1:"A traveling web marketer and creator, based across Southeast and East Asia in winter and living the van life in Japan through spring and summer. 6 years of fully remote independent work.",
+    aboutP2:"My guiding principle: \"ink and negative space\" — an aesthetic of subtraction. I prioritize designs that deliver the message clearly over flashy decoration. My strength is combining marketing data analysis with hands-on frontend implementation using Three.js/D3.js.",
+    impactTitle:"Why It Matters",
+    impactLead:"The power of the web isn't only for big city companies. The small local businesses I meet while traveling have just as much room to grow revenue and jobs, if the right message reaches the right people. That's why I share what I know instead of keeping it to myself.",
+    impact1h:"Growing revenue for local & small businesses, the right way",
+    impact1p:"Local shops and businesses that were invisible online, reaching the customers they always deserved through SEO and SNS strategy — helping money and people circulate back into the local economy.",
+    impact2h:"Carrying Japanese culture forward, and outward",
+    impact2p:"Recording and rebuilding fading Japanese crafts and aesthetics, like calligraphy, using digital technology. Paired with native translation, so it's shared correctly and beautifully, at home and abroad.",
+    impact3h:"Keeping AI from becoming a privilege of experts",
+    impact3p:"Translating AI into practical, everyday use for individuals and small businesses who feel stuck by 'AI sounds too hard.' Ongoing support to keep a technology gap from becoming an opportunity gap.",
+    priceTitle:"Sample Pricing",
+    price1n:"SEO Audit Report", price1d:"Identify current issues and propose prioritized improvements.",
+    price2n:"LP Structure Design", price2d:"From flow design through to wireframes.",
+    price3n:"SNS Management", price3d:"Ongoing posting design, analysis, and improvement cycles.", price3amt:"¥50,000〜/monthly",
+    faqTitle:"FAQ",
+    faq1q:"Can I consult even with a small budget?", faq1a:"Yes. Let's start with a free consultation to understand your situation and find an approach that fits your budget.",
+    faq2q:"Is an ongoing contract required?", faq2a:"One-off requests are also welcome — many clients start with a single spot consultation.",
+    faq3q:"Is working with someone based overseas an issue?", faq3a:"I work fully remote by default and am used to online collaboration. Just let me know about time-zone differences in advance.",
+    contactTitle:"Get a free consultation",
+    contactP:"Send your site's URL and I'll return a free quick diagnosis of your first-view (hero section).",
+    contactCta:"Start a chat with the AI Navigator"
+  }
+};
+
+let currentLang = "ja";
+
+function applyI18n(){
+  const dict = I18N[currentLang];
+  document.documentElement.lang = currentLang;
+  document.querySelectorAll("[data-i18n]").forEach(el=>{
+    const key = el.getAttribute("data-i18n");
+    if(dict[key]) el.textContent = dict[key];
+  });
+  document.querySelectorAll("[data-i18n-html]").forEach(el=>{
+    const key = el.getAttribute("data-i18n-html");
+    if(dict[key]) el.innerHTML = dict[key];
+  });
+}
+
+document.querySelectorAll(".lang-btn").forEach(btn=>{
+  btn.addEventListener("click", ()=>{
+    currentLang = btn.dataset.lang;
+    document.querySelectorAll(".lang-btn").forEach(b=>b.classList.toggle("active", b===btn));
+    applyI18n();
+  });
+});
+
+applyI18n();
+
+// スクロールで要素をふわっと表示（IntersectionObserver）
+const revealEls = document.querySelectorAll('.reveal');
+if('IntersectionObserver' in window && revealEls.length){
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        entry.target.classList.add('is-visible');
+        io.unobserve(entry.target);
+      }
+    });
+  },{threshold:0.15});
+  revealEls.forEach(el=>io.observe(el));
+}else{
+  revealEls.forEach(el=>el.classList.add('is-visible'));
+}
+</script>
 </body>
 </html>
