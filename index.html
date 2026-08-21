@@ -160,6 +160,15 @@
   .controls-hint b{color:#00ffcc;font-weight:500;}
   @media (max-width:600px){ .controls-hint{display:none;} }
 
+  /* ===== スマホ専用：タッチ操作ヒント ===== */
+  .controls-hint-sp{display:none;}
+  @media (max-width:600px){
+    .controls-hint-sp{display:block;position:absolute;bottom:98px;right:20px;z-index:4;pointer-events:none;
+       font-size:10px;color:#ff9500;text-align:right;line-height:1.7;letter-spacing:0.02em;
+       text-shadow:0 1px 4px rgba(0,0,0,0.8);}
+    .controls-hint-sp b{color:#00ffcc;font-weight:500;}
+  }
+
   @media (max-width:600px){
     h1{font-size:clamp(0.85rem, 4.6vw, 1.3rem);min-height:2.4rem;}
     .ui{padding:20px;}
@@ -193,6 +202,12 @@
 <div class="controls-hint" data-i18n-html="controlsHint">
   <b>スクロール</b>：ズーム イン/アウト<br>
   <b>左ドラッグ</b>：視点を回転
+</div>
+
+<!-- 右下：3Dロケット操作方法のヒント（スマホ・タッチ操作の説明） -->
+<div class="controls-hint-sp" data-i18n-html="controlsHintSp">
+  <b>ピンチ</b>：ズーム イン/アウト<br>
+  <b>スワイプ</b>：視点を回転
 </div>
 
 <div class="ui">
@@ -286,6 +301,7 @@ const I18N = {
     portfolioLink:"実績・スキルを見る",
     radarLabel:"WORKS<br>SCAN",
     controlsHint:"<b>スクロール</b>：ズーム イン/アウト<br><b>左ドラッグ</b>：視点を回転",
+    controlsHintSp:"<b>ピンチ</b>：ズーム イン/アウト<br><b>スワイプ</b>：視点を回転",
     loginPrompt:"まずGoogleでログインしてください（本人確認のみ。課金は発生しません）。",
     apiKeyPrompt:"ご自身のAnthropic APIキーを入力してください。ご利用分の料金はあなたご自身に請求されます（当サイト運営者には一切共有・請求されません）。",
     apiKeyPlaceholder:"sk-ant-...",
@@ -313,6 +329,7 @@ const I18N = {
     portfolioLink:"See my work",
     radarLabel:"WORKS<br>SCAN",
     controlsHint:"<b>Scroll</b>: zoom in / out<br><b>Left-drag</b>: rotate view",
+    controlsHintSp:"<b>Pinch</b>: zoom in / out<br><b>Swipe</b>: rotate view",
     loginPrompt:"Sign in with Google first (identity check only — no charge to you here).",
     apiKeyPrompt:"Enter your own Anthropic API key. Usage is billed to your own account — never shared with or billed to the site owner.",
     apiKeyPlaceholder:"sk-ant-...",
@@ -388,7 +405,7 @@ let visitorApiKey = null; // 訪問者ご自身のAnthropic APIキー（この�
   Google Cloud Console で発行したクライアントIDに書き換えてください。
   取得手順は納品メッセージを参照。
 */
-const GOOGLE_CLIENT_ID = "369455721645-aainu1gjduq226recqhkqqie92vjrqk5.apps.googleusercontent.com";
+const GOOGLE_CLIENT_ID = "589049145849-j9mstbcjsng1kmej78pm1lmctollodd3.apps.googleusercontent.com";
 
 document.getElementById('chatTrigger').addEventListener('click', openChat);
 document.getElementById('ctaOpen').addEventListener('click', openChat);
@@ -400,15 +417,37 @@ function openChat(){
 }
 
 function initGoogleSignIn(){
-  if(idToken || !window.google || document.getElementById('googleBtnHolder').childElementCount) return;
-  google.accounts.id.initialize({
-    client_id: GOOGLE_CLIENT_ID,
-    callback: onGoogleLogin
-  });
-  google.accounts.id.renderButton(
-    document.getElementById('googleBtnHolder'),
-    { theme:'outline', size:'medium', text:'signin_with', shape:'pill' }
-  );
+  if(idToken || document.getElementById('googleBtnHolder').childElementCount) return;
+
+  // GSIスクリプトがブロックされた/読み込めなかった場合（通信環境・アプリ内ブラウザ等）
+  if(!window.google || !window.google.accounts){
+    showGoogleLoginError();
+    return;
+  }
+
+  try{
+    google.accounts.id.initialize({
+      client_id: GOOGLE_CLIENT_ID,
+      callback: onGoogleLogin,
+      itp_support: true,        // Safari/モバイルのITP(トラッキング防止)対策
+      use_fedcm_for_prompt: true
+    });
+    google.accounts.id.renderButton(
+      document.getElementById('googleBtnHolder'),
+      { theme:'outline', size:'medium', text:'signin_with', shape:'pill' }
+    );
+  }catch(e){
+    console.error('Google Sign-In init error:', e);
+    showGoogleLoginError();
+  }
+}
+
+function showGoogleLoginError(){
+  const holder = document.getElementById('googleBtnHolder');
+  const msg = (currentLang === 'en')
+    ? 'Google Sign-In is unavailable right now (blocked by browser/network, or in-app browser). Please try Chrome/Safari directly, or contact us via LINE.'
+    : 'Googleログインをご利用いただけません（ブラウザ/通信環境の制限、またはアプリ内ブラウザの可能性）。Chrome/Safariで直接開くか、LINEからご相談ください。';
+  holder.innerHTML = `<div style="font-size:11px;color:#ff9500;line-height:1.6;max-width:260px;">${msg}</div>`;
 }
 
 function onGoogleLogin(response){
