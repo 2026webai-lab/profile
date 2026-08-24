@@ -110,6 +110,13 @@
   .toolbox .chip{transition:transform .25s ease,border-color .25s ease,color .25s ease;}
   .toolbox .chip:hover{transform:translateY(-2px);border-color:var(--accent);color:var(--accent);}
 
+  .name-note{margin-top:32px;background:var(--surface);border:1px solid var(--line);border-radius:8px;
+     padding:24px 28px;}
+  .name-note-title{font-size:0.72rem;letter-spacing:0.1em;color:var(--accent);margin-bottom:12px;font-weight:700;}
+  .name-note p{font-size:0.8rem;color:var(--text-dim);line-height:1.85;margin-bottom:10px;}
+  .name-note p:last-child{margin-bottom:0;}
+  .name-note strong{color:#e6f7f2;}
+
   .about-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);
      border:1px solid var(--line);border-radius:8px;overflow:hidden;margin-bottom:28px;}
   .about-stat{background:var(--surface);padding:20px 16px;text-align:center;}
@@ -122,13 +129,6 @@
 
   /* impact */
   .impact-lead{font-size:0.92rem;color:var(--text-dim);max-width:640px;margin-bottom:36px;line-height:1.9;}
-
-  /* price */
-  .price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
-  .price-card{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:26px;}
-  .price-card .name{font-size:0.85rem;font-weight:500;margin-bottom:6px;}
-  .price-card .amount{font-family:'Space Grotesk',sans-serif;font-size:1.5rem;color:var(--accent);font-weight:700;margin-bottom:12px;}
-  .price-card .desc{font-size:0.78rem;color:var(--text-dim);}
 
   /* faq */
   .faq-item{padding:18px 0;border-bottom:1px solid var(--line);}
@@ -149,7 +149,6 @@
     .work-item{grid-template-columns:1fr;}
     .work-media img, .work-media video{height:auto;max-height:220px;}
     .about-grid{grid-template-columns:1fr;}
-    .price-grid{grid-template-columns:1fr;}
   }
 </style>
 </head>
@@ -170,9 +169,9 @@
 
 <header class="hero">
   <div class="wrap">
-    <div class="eyebrow" data-i18n="heroEyebrow">HATTORI — WEB MARKETER / CREATOR</div>
+    <div class="eyebrow" data-i18n="heroEyebrow">HATTORI ICHIDAI — WEB MARKETER / CREATOR</div>
     <h1 data-i18n-html="heroH1">データと美意識で、<br>事業の<span>伸びしろ</span>を形にする。</h1>
-    <p data-i18n="heroP">6年間、旅をしながら独立稼働してきたWebマーケター。SEO・SNS運用・LP改善・AI活用を、分析力と実装力の両輪で支援します。</p>
+    <p data-i18n="heroP">フルリモートでの独立稼働歴6年。SEO・SNS運用・LP改善・AI活用を、分析力と実装力の両輪で支援します。</p>
     <div class="hero-ctas">
       <a href="index.html" class="btn btn-primary" data-i18n="heroCta1">AIに無料相談する</a>
       <a href="#works" class="btn btn-ghost" data-i18n="heroCta2">実績を見る</a>
@@ -293,7 +292,7 @@
         <h3 data-i18n="w4h">リフォーム会社のご提案用サイト</h3>
         <p data-i18n-html="w4p">
           住まいの刷新や改修事例を魅力的に伝えるリフォーム事業者向けのデザインプロトタイプ。見やすさと見積もり・相談導線を両立したレイアウト設計。
-          <a href="リフォーム.html">詳細を見る (リフォーム.html)</a>
+          <a href="https://2026webai-lab.github.io/-/">詳細を見る (リフォームご提案用)</a>
         </p>
         <div class="stack">
           <span class="chip">HTML/CSS</span><span class="chip">Figma</span><span class="chip">UI/UX Design</span>
@@ -311,7 +310,7 @@
         <h3 data-i18n="w5h">レストランご提案用サイト</h3>
         <p data-i18n-html="w5p">
           料理の世界観や店舗の雰囲気を伝える、飲食店向けのデザインプロトタイプ。メニューの閲覧性やオンライン予約へのスムーズな接続を意識した構成。
-          <a href="レストラン.html">詳細を見る (レストラン.html)</a>
+          <a href="https://2026webai-lab.github.io/resutorant/">詳細を見る (レストランご提案用)</a>
         </p>
         <div class="stack">
           <span class="chip">HTML/CSS</span><span class="chip">UI/UX Design</span>
@@ -329,7 +328,7 @@
         <h3 data-i18n="w6h">ブライダルご提案用サイト</h3>
         <p data-i18n-html="w6p">
           エレガントかつ洗練された世界観で特別な一日をプロデュースする、ブライダル事業者向けWebデザイン。ビジュアル重視の構成と見学予約導線。
-          <a href="ブライダル.html">詳細を見る (ブライダル.html)</a>
+          <a href="https://2026webai-lab.github.io/buraidaru/">詳細を見る (ブライダルご提案用)</a>
         </p>
         <div class="stack">
           <span class="chip">HTML/CSS</span><span class="chip">UI/UX Design</span>
@@ -367,13 +366,13 @@
     </div>
     <div class="about-stats reveal">
       <div class="about-stat"><div class="num">6+</div><div class="lbl">YEARS REMOTE</div></div>
-      <div class="about-stat"><div class="num">13</div><div class="lbl">COUNTRIES</div></div>
       <div class="about-stat"><div class="num">15+</div><div class="lbl">CLIENTS</div></div>
+      <div class="about-stat"><div class="num">100%</div><div class="lbl">FULL REMOTE</div></div>
     </div>
     <div class="about-grid">
       <div class="reveal">
-        <p data-i18n="aboutP1">冬は東南アジア・東アジアを拠点に、春夏は日本でバンライフをしながら活動する、旅するWebマーケター兼クリエイター。6年間、フルリモートでの独立稼働を続けています。</p>
-        <p data-i18n="aboutP2">軸にしているのは「墨と余白」— 引き算の美意識。派手な装飾より、伝えるべき情報が伝わる設計を優先します。マーケティングの数値分析と、Three.js/D3.jsを用いたフロントエンド実装の両方を自分の手で行えることが強みです。</p>
+        <p data-i18n="aboutP1">フルリモートでの独立稼働歴6年。SEO・SNS運用・LP改善・AI活用まで、マーケティングの数値分析とフロントエンド実装の両方を自分の手で行えることが強みです。</p>
+        <p data-i18n="aboutP2">軸にしているのは「墨と余白」— 引き算の美意識。派手な装飾より、伝えるべき情報が伝わる設計を優先します。オンラインでの折衝・進行管理に慣れており、リモート環境でも安定した稼働品質を保ちます。</p>
       </div>
       <div class="reveal">
         <div class="section-num mono" style="margin-bottom:14px;">TOOLBOX</div>
@@ -384,6 +383,12 @@
         </div>
       </div>
     </div>
+    <div class="name-note reveal">
+      <div class="name-note-title" data-i18n="nameNoteTitle">名前表記について</div>
+      <p data-i18n-html="nameNoteP1"><strong>HATTORI ICHIDAI</strong>（服部一大）が本名で、業務・実務のご連絡はすべてこの名義で承ります。</p>
+      <p data-i18n-html="nameNoteP2"><strong>KAZUYA</strong>は、作品制作（書道スクロールサイト、バンライフマガジンサイト等）の際に使用するクリエイター名義・ペンネームです。「車中泊好き」「海外好き」というキャラクター設定のもとで作品世界を構築しており、Instagram等のSNS発信も含め、このキャラクター設定に基づく創作活動として運用しています。</p>
+      <p data-i18n="nameNoteP3">実務者としてのHATTORI ICHIDAIの稼働形態・所在地・対応可能時間等については、面談時に個別にご説明いたします。</p>
+    </div>
   </div>
 </section>
 
@@ -393,48 +398,22 @@
       <div class="section-num mono">04 / IMPACT</div>
       <h2 data-i18n="impactTitle">社会的意義</h2>
     </div>
-    <p class="impact-lead reveal" data-i18n="impactLead">Webの力は、都市部の大企業だけのものではない。旅先で出会う地方の小さな事業者にこそ、正しく届けば売上と雇用が生まれる余地がある。だからこそ、専門知識を独り占めせず、現場に還元することを大切にしています。</p>
+    <p class="impact-lead reveal" data-i18n="impactLead">大切にしているのは、専門知識を「特別な人だけのもの」にしないことです。情報発信力や技術力に差がある現場に立ち会うたび、自分のスキルがそのまま誰かの機会になる瞬間にやりがいを感じてきました。入社後もこの視点を持ち、成果への当事者意識をもって事業成長に貢献したいと考えています。</p>
     <div class="grid-3">
       <div class="skill-card reveal">
-        <div class="tag mono">LOCAL</div>
-        <h3 data-i18n="impact1h">地方・中小事業者の売上を、正しく伸ばす</h3>
-        <p data-i18n="impact1p">情報発信力の弱さで埋もれていた地方の店舗・事業者を、SEOとSNS設計で本来届くべき顧客に届ける。地域経済に人とお金が循環する仕組みづくりに貢献します。</p>
+        <div class="tag mono">OWNERSHIP</div>
+        <h3 data-i18n="impact1h">成果に責任を持つ、実行力</h3>
+        <p data-i18n="impact1p">中小事業者の情報発信を、SEO・SNS設計を通じて「届くべき顧客に届く」状態へ改善。数値に基づいた仮説検証を繰り返し、成果への当事者意識を持って取り組んできました。</p>
       </div>
       <div class="skill-card reveal">
-        <div class="tag mono">CULTURE</div>
-        <h3 data-i18n="impact2h">日本文化を、次の世代・海外へつなぐ</h3>
-        <p data-i18n="impact2p">書道など、失われつつある日本の技術・美意識をデジタル技術で記録・再構築。ネイティブ翻訳と組み合わせ、国内外へ正しく、美しく伝えます。</p>
+        <div class="tag mono">DELIVERY</div>
+        <h3 data-i18n="impact2h">専門知識を、独占せず届ける姿勢</h3>
+        <p data-i18n="impact2p">書道などの専門技術をデジタル技術で再構築し、ネイティブ翻訳と組み合わせて国内外へ発信。専門性を独り占めせず、正しい形で広く伝えることを重視しています。</p>
       </div>
       <div class="skill-card reveal">
-        <div class="tag mono">ACCESS</div>
-        <h3 data-i18n="impact3h">AIを、専門家だけのものにしない</h3>
-        <p data-i18n="impact3p">「AIは難しそう」で足踏みする個人・小規模事業者に、実務目線でAI活用を翻訳して届ける。技術格差を、機会格差にしないための伴走を続けます。</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="price">
-  <div class="wrap">
-    <div class="section-head">
-      <div class="section-num mono">05 / PRICE</div>
-      <h2 data-i18n="priceTitle">支援メニューの目安</h2>
-    </div>
-    <div class="price-grid">
-      <div class="price-card">
-        <div class="name" data-i18n="price1n">SEO現状分析レポート</div>
-        <div class="amount">¥30,000〜</div>
-        <div class="desc" data-i18n="price1d">現状の課題を洗い出し、優先度付きで改善提案します。</div>
-      </div>
-      <div class="price-card">
-        <div class="name" data-i18n="price2n">LP構成案作成</div>
-        <div class="amount">¥50,000〜</div>
-        <div class="desc" data-i18n="price2d">導線設計からワイヤーフレームまで作成します。</div>
-      </div>
-      <div class="price-card">
-        <div class="name" data-i18n="price3n">SNS運用代行</div>
-        <div class="amount" data-i18n="price3amt">¥50,000〜/月</div>
-        <div class="desc" data-i18n="price3d">投稿設計・分析・改善サイクルを継続的に回します。</div>
+        <div class="tag mono">GROWTH</div>
+        <h3 data-i18n="impact3h">変化を恐れず、学び続ける姿勢</h3>
+        <p data-i18n="impact3p">AI活用やフロントエンドの新技術など、常に新しい領域を独学で吸収し、実務に落とし込んできました。この学習意欲と実行力を、入社後の事業成長にも還元したいと考えています。</p>
       </div>
     </div>
   </div>
@@ -443,20 +422,20 @@
 <section id="faq">
   <div class="wrap">
     <div class="section-head">
-      <div class="section-num mono">06 / FAQ</div>
+      <div class="section-num mono">05 / FAQ</div>
       <h2 data-i18n="faqTitle">よくある質問</h2>
     </div>
     <div class="faq-item">
-      <div class="q"><span>Q.</span><span data-i18n="faq1q">予算が少なくても相談できますか？</span></div>
-      <div class="a" data-i18n="faq1a">はい。まずは無料相談で状況をお聞きし、予算に合う進め方を一緒に考えます。</div>
+      <div class="q"><span>Q.</span><span data-i18n="faq1q">HATTORIとKAZUYA、名義を分けているのはなぜですか？</span></div>
+      <div class="a" data-i18n="faq1a">業務用の本名義（HATTORI ICHIDAI）と、個人の創作活動用のペンネーム（KAZUYA）を明確に分けて運用しています。入社後も、業務に支障のない範囲で個人制作活動を継続する想定です。</div>
     </div>
     <div class="faq-item">
-      <div class="q"><span>Q.</span><span data-i18n="faq2q">継続契約は必須ですか？</span></div>
-      <div class="a" data-i18n="faq2a">単発のご依頼も対応可能です。まずはスポットでご相談いただくケースも多いです。</div>
+      <div class="q"><span>Q.</span><span data-i18n="faq2q">フルリモートでの稼働実績が中心ですが、出社や常駐勤務は可能ですか？</span></div>
+      <div class="a" data-i18n="faq2a">はい、業務内容や貴社の運用に応じて柔軟に対応可能です。稼働形態の詳細は面談時にご相談させてください。</div>
     </div>
     <div class="faq-item">
-      <div class="q"><span>Q.</span><span data-i18n="faq3q">海外在住でもやり取りは問題ないですか？</span></div>
-      <div class="a" data-i18n="faq3a">フルリモートでの稼働が前提のため、オンラインでのやり取りに慣れています。時差のみ事前にご相談ください。</div>
+      <div class="q"><span>Q.</span><span data-i18n="faq3q">フリーランス経験が中心ですが、チームでの業務経験はありますか？</span></div>
+      <div class="a" data-i18n="faq3a">フリーランスとして案件を進める中で、クライアント企業のご担当者様やチームと連携しながら、進行管理・共同作業を継続的に行ってきました。</div>
     </div>
   </div>
 </section>
@@ -464,24 +443,24 @@
 <section id="contact" style="border-bottom:none;">
   <div class="wrap">
     <div class="contact-box">
-      <h2 data-i18n="contactTitle">まずは無料でご相談ください</h2>
-      <p data-i18n="contactP">貴社サイトのURLを送っていただければ、ファーストビューの簡易診断を無料でお返しします。</p>
-      <a href="index.html" class="btn btn-primary" data-i18n="contactCta">AIナビゲーターで相談を始める</a>
+      <h2 data-i18n="contactTitle">面談・ご連絡について</h2>
+      <p data-i18n="contactP">職務経歴やこれまでの制作実績について、より詳しくお伝えできます。ご不明点がございましたら、以下よりお気軽にお問い合わせください。</p>
+      <a href="index.html" class="btn btn-primary" data-i18n="contactCta">AIナビゲーターに質問する</a>
     </div>
   </div>
 </section>
 
 <footer>
-  <div class="wrap mono">ATLAS TO PARADISE — 楽園への古地図 © 2026 HATTORI</div>
+  <div class="wrap mono">ATLAS TO PARADISE — 楽園への古地図 © 2026 HATTORI ICHIDAI</div>
 </footer>
 
 <script>
 const I18N = {
   ja:{
     backLink:"← AIナビゲーターに戻る",
-    heroEyebrow:"HATTORI — WEB MARKETER / CREATOR",
+    heroEyebrow:"HATTORI ICHIDAI — WEB MARKETER / CREATOR",
     heroH1:"データと美意識で、<br>事業の<span>伸びしろ</span>を形にする。",
-    heroP:"6年間、旅をしながら独立稼働してきたWebマーケター。SEO・SNS運用・LP改善・AI活用を、分析力と実装力の両輪で支援します。",
+    heroP:"フルリモートでの独立稼働歴6年。SEO・SNS運用・LP改善・AI活用を、分析力と実装力の両輪で支援します。",
     heroCta1:"AIに無料相談する",
     heroCta2:"実績を見る",
     candooTitle:"提供できること",
@@ -505,41 +484,41 @@ const I18N = {
     w3h:"Taichung Travel Prototype",
     w3p:'台中の視覚モックアップを、モーダル表示・レスポンシブ対応込みで完全コーディング。大容量base64アセットの安定した扱い方も確立。<a href="taiwan.html">詳細を見る (taiwan.html)</a>',
     w4h:"リフォーム会社のご提案用サイト",
-    w4p:'住まいの刷新や改修事例を魅力的に伝えるリフォーム事業者向けのデザインプロトタイプ。見やすさと見積もり・相談導線を両立したレイアウト設計。<a href="リフォーム.html">詳細を見る (リフォーム.html)</a>',
+    w4p:'住まいの刷新や改修事例を魅力的に伝えるリフォーム事業者向けのデザインプロトタイプ。見やすさと見積もり・相談導線を両立したレイアウト設計。<a href="https://2026webai-lab.github.io/-/">詳細を見る (リフォームご提案用)</a>',
     w5h:"レストランご提案用サイト",
-    w5p:'料理の世界観や店舗の雰囲気を伝える、飲食店向けのデザインプロトタイプ。メニューの閲覧性やオンライン予約へのスムーズな接続を意識した構成。<a href="レストラン.html">詳細を見る (レストラン.html)</a>',
+    w5p:'料理の世界観や店舗の雰囲気を伝える、飲食店向けのデザインプロトタイプ。メニューの閲覧性やオンライン予約へのスムーズな接続を意識した構成。<a href="https://2026webai-lab.github.io/resutorant/">詳細を見る (レストランご提案用)</a>',
     w6h:"ブライダルご提案用サイト",
-    w6p:'エレガントかつ洗練された世界観で特別な一日をプロデュースする、ブライダル事業者向けWebデザイン。ビジュアル重視の構成と見学予約導線。<a href="ブライダル.html">詳細を見る (ブライダル.html)</a>',
+    w6p:'エレガントかつ洗練された世界観で特別な一日をプロデュースする、ブライダル事業者向けWebデザイン。ビジュアル重視の構成と見学予約導線。<a href="https://2026webai-lab.github.io/buraidaru/">詳細を見る (ブライダルご提案用)</a>',
     w7h:"ATLAS TO PARADISE トップページ — 3D AIナビゲーター",
     w7p:'Three.jsで構築したフルスクリーン3Dロケット演出。打ち上げ→大気圏離脱→地球周回まで、パーティクル(炎・煙・宇宙塵)と流れ星をリアルタイム物理でアニメーション。多言語(JP/EN/ZH)AIチャット窓口とGoogle OAuthログインゲート、Cloudflare Worker経由のAPIキー保護・利用制限も統合した、最新3D×AIの統合フロントエンド。<a href="index.html">詳細を見る (index.html)</a>',
     aboutTitle:"自己紹介",
-    aboutP1:"冬は東南アジア・東アジアを拠点に、春夏は日本でバンライフをしながら活動する、旅するWebマーケター兼クリエイター。6年間、フルリモートでの独立稼働を続けています。",
-    aboutP2:"軸にしているのは「墨と余白」— 引き算の美意識。派手な装飾より、伝えるべき情報が伝わる設計を優先します。マーケティングの数値分析と、Three.js/D3.jsを用いたフロントエンド実装の両方を自分の手で行えることが強みです。",
+    aboutP1:"フルリモートでの独立稼働歴6年。SEO・SNS運用・LP改善・AI活用まで、マーケティングの数値分析とフロントエンド実装の両方を自分の手で行えることが強みです。",
+    aboutP2:"軸にしているのは「墨と余白」— 引き算の美意識。派手な装飾より、伝えるべき情報が伝わる設計を優先します。オンラインでの折衝・進行管理に慣れており、リモート環境でも安定した稼働品質を保ちます。",
+    nameNoteTitle:"名前表記について",
+    nameNoteP1:"<strong>HATTORI ICHIDAI</strong>（服部一大）が本名で、業務・実務のご連絡はすべてこの名義で承ります。",
+    nameNoteP2:"<strong>KAZUYA</strong>は、作品制作（書道スクロールサイト、バンライフマガジンサイト等）の際に使用するクリエイター名義・ペンネームです。「車中泊好き」「海外好き」というキャラクター設定のもとで作品世界を構築しており、Instagram等のSNS発信も含め、このキャラクター設定に基づく創作活動として運用しています。",
+    nameNoteP3:"実務者としてのHATTORI ICHIDAIの稼働形態・所在地・対応可能時間等については、面談時に個別にご説明いたします。",
     impactTitle:"社会的意義",
-    impactLead:"Webの力は、都市部の大企業だけのものではない。旅先で出会う地方の小さな事業者にこそ、正しく届けば売上と雇用が生まれる余地がある。だからこそ、専門知識を独り占めせず、現場に還元することを大切にしています。",
-    impact1h:"地方・中小事業者の売上を、正しく伸ばす",
-    impact1p:"情報発信力の弱さで埋もれていた地方の店舗・事業者を、SEOとSNS設計で本来届くべき顧客に届ける。地域経済に人とお金が循環する仕組みづくりに貢献します。",
-    impact2h:"日本文化を、次の世代・海外へつなぐ",
-    impact2p:"書道など、失われつつある日本の技術・美意識をデジタル技術で記録・再構築。ネイティブ翻訳と組み合わせ、国内外へ正しく、美しく伝えます。",
-    impact3h:"AIを、専門家だけのものにしない",
-    impact3p:"「AIは難しそう」で足踏みする個人・小規模事業者に、実務目線でAI活用を翻訳して届ける。技術格差を、機会格差にしないための伴走を続けます。",
-    priceTitle:"支援メニューの目安",
-    price1n:"SEO現状分析レポート", price1d:"現状の課題を洗い出し、優先度付きで改善提案します。",
-    price2n:"LP構成案作成", price2d:"導線設計からワイヤーフレームまで作成します。",
-    price3n:"SNS運用代行", price3d:"投稿設計・分析・改善サイクルを継続的に回します。", price3amt:"¥50,000〜/月",
+    impactLead:"大切にしているのは、専門知識を「特別な人だけのもの」にしないことです。情報発信力や技術力に差がある現場に立ち会うたび、自分のスキルがそのまま誰かの機会になる瞬間にやりがいを感じてきました。入社後もこの視点を持ち、成果への当事者意識をもって事業成長に貢献したいと考えています。",
+    impact1h:"成果に責任を持つ、実行力",
+    impact1p:"中小事業者の情報発信を、SEO・SNS設計を通じて「届くべき顧客に届く」状態へ改善。数値に基づいた仮説検証を繰り返し、成果への当事者意識を持って取り組んできました。",
+    impact2h:"専門知識を、独占せず届ける姿勢",
+    impact2p:"書道などの専門技術をデジタル技術で再構築し、ネイティブ翻訳と組み合わせて国内外へ発信。専門性を独り占めせず、正しい形で広く伝えることを重視しています。",
+    impact3h:"変化を恐れず、学び続ける姿勢",
+    impact3p:"AI活用やフロントエンドの新技術など、常に新しい領域を独学で吸収し、実務に落とし込んできました。この学習意欲と実行力を、入社後の事業成長にも還元したいと考えています。",
     faqTitle:"よくある質問",
-    faq1q:"予算が少なくても相談できますか？", faq1a:"はい。まずは無料相談で状況をお聞きし、予算に合う進め方を一緒に考えます。",
-    faq2q:"継続契約は必須ですか？", faq2a:"単発のご依頼も対応可能です。まずはスポットでご相談いただくケースも多いです。",
-    faq3q:"海外在住でもやり取りは問題ないですか？", faq3a:"フルリモートでの稼働が前提のため、オンラインでのやり取りに慣れています。時差のみ事前にご相談ください。",
-    contactTitle:"まずは無料でご相談ください",
-    contactP:"貴社サイトのURLを送っていただければ、ファーストビューの簡易診断を無料でお返しします。",
-    contactCta:"AIナビゲーターで相談を始める"
+    faq1q:"HATTORIとKAZUYA、名義を分けているのはなぜですか？", faq1a:"業務用の本名義（HATTORI ICHIDAI）と、個人の創作活動用のペンネーム（KAZUYA）を明確に分けて運用しています。入社後も、業務に支障のない範囲で個人制作活動を継続する想定です。",
+    faq2q:"フルリモートでの稼働実績が中心ですが、出社や常駐勤務は可能ですか？", faq2a:"はい、業務内容や貴社の運用に応じて柔軟に対応可能です。稼働形態の詳細は面談時にご相談させてください。",
+    faq3q:"フリーランス経験が中心ですが、チームでの業務経験はありますか？", faq3a:"フリーランスとして案件を進める中で、クライアント企業のご担当者様やチームと連携しながら、進行管理・共同作業を継続的に行ってきました。",
+    contactTitle:"面談・ご連絡について",
+    contactP:"職務経歴やこれまでの制作実績について、より詳しくお伝えできます。ご不明点がございましたら、以下よりお気軽にお問い合わせください。",
+    contactCta:"AIナビゲーターに質問する"
   },
   en:{
     backLink:"← Back to AI Navigator",
-    heroEyebrow:"HATTORI — WEB MARKETER / CREATOR",
+    heroEyebrow:"HATTORI ICHIDAI — WEB MARKETER / CREATOR",
     heroH1:"Turning data and craft<br>into <span>growth</span> for your business.",
-    heroP:"A web marketer who has worked fully remote while traveling for 6 years. Supporting SEO, SNS management, LP improvement, and AI adoption with both analysis and hands-on implementation.",
+    heroP:"6 years of independent, fully remote work. Supporting SEO, SNS management, LP improvement, and AI adoption with both analysis and hands-on implementation.",
     heroCta1:"Talk to the AI for free",
     heroCta2:"View works",
     candooTitle:"What I Offer",
@@ -563,35 +542,35 @@ const I18N = {
     w3h:"Taichung Travel Prototype",
     w3p:'A pixel-faithful build of Taichung travel visual mockups, complete with modal dialogs and full responsive support. Established a stable approach for handling large base64-embedded assets. <a href="taiwan.html">View details (taiwan.html)</a>',
     w4h:"Renovation Company Proposal Site",
-    w4p:'A design prototype for renovation businesses that showcases refurbishment case studies. Layout balances visual appeal with clear quote/consultation flows. <a href="リフォーム.html">View details (リフォーム.html)</a>',
+    w4p:'A design prototype for renovation businesses that showcases refurbishment case studies. Layout balances visual appeal with clear quote/consultation flows. <a href="https://2026webai-lab.github.io/-/">View details (Renovation Proposal)</a>',
     w5h:"Restaurant Proposal Site",
-    w5p:'A design prototype for restaurants that conveys the cuisine\'s world and atmosphere. Built for easy menu browsing and a smooth path to online reservations. <a href="レストラン.html">View details (レストラン.html)</a>',
+    w5p:'A design prototype for restaurants that conveys the cuisine\'s world and atmosphere. Built for easy menu browsing and a smooth path to online reservations. <a href="https://2026webai-lab.github.io/resutorant/">View details (Restaurant Proposal)</a>',
     w6h:"Bridal Proposal Site",
-    w6p:'An elegant, refined web design for bridal businesses producing a couple\'s special day. Visual-first layout with a clear venue-tour booking flow. <a href="ブライダル.html">View details (ブライダル.html)</a>',
+    w6p:'An elegant, refined web design for bridal businesses producing a couple\'s special day. Visual-first layout with a clear venue-tour booking flow. <a href="https://2026webai-lab.github.io/buraidaru/">View details (Bridal Proposal)</a>',
     w7h:"ATLAS TO PARADISE Top Page — 3D AI Navigator",
     w7p:'A fullscreen 3D rocket sequence built with Three.js — launch, atmospheric exit, orbit — animated in real time with particle effects (fire, smoke, stardust) and shooting stars. Integrates a multilingual (JP/EN/ZH) AI chat desk, a Google OAuth login gate, and API key protection/rate limiting via Cloudflare Workers. <a href="index.html">View details (index.html)</a>',
     aboutTitle:"About",
-    aboutP1:"A traveling web marketer and creator, based across Southeast and East Asia in winter and living the van life in Japan through spring and summer. 6 years of fully remote independent work.",
-    aboutP2:"My guiding principle: \"ink and negative space\" — an aesthetic of subtraction. I prioritize designs that deliver the message clearly over flashy decoration. My strength is combining marketing data analysis with hands-on frontend implementation using Three.js/D3.js.",
+    aboutP1:"6 years of independent, fully remote work. From SEO and SNS management to LP improvement and AI adoption, my strength is handling both marketing data analysis and frontend implementation myself.",
+    aboutP2:"My guiding principle: \"ink and negative space\" — an aesthetic of subtraction. I prioritize designs that deliver the message clearly over flashy decoration. I'm comfortable with online negotiation and project management, and maintain consistent quality in a remote setting.",
+    nameNoteTitle:"About the Names",
+    nameNoteP1:"<strong>HATTORI ICHIDAI</strong> is my legal name, and all professional and business correspondence is handled under this name.",
+    nameNoteP2:"<strong>KAZUYA</strong> is a creator name / pen name used specifically for creative work (the calligraphy scroll site, the van-life magazine site, etc.). This name operates under a character setting — \"loves car camping,\" \"loves traveling abroad\" — and any related SNS content, including Instagram, is run as part of that creative persona.",
+    nameNoteP3:"Details of HATTORI ICHIDAI's working arrangement, location, and availability as a professional will be explained individually during an interview.",
     impactTitle:"Why It Matters",
-    impactLead:"The power of the web isn't only for big city companies. The small local businesses I meet while traveling have just as much room to grow revenue and jobs, if the right message reaches the right people. That's why I share what I know instead of keeping it to myself.",
-    impact1h:"Growing revenue for local & small businesses, the right way",
-    impact1p:"Local shops and businesses that were invisible online, reaching the customers they always deserved through SEO and SNS strategy — helping money and people circulate back into the local economy.",
-    impact2h:"Carrying Japanese culture forward, and outward",
-    impact2p:"Recording and rebuilding fading Japanese crafts and aesthetics, like calligraphy, using digital technology. Paired with native translation, so it's shared correctly and beautifully, at home and abroad.",
-    impact3h:"Keeping AI from becoming a privilege of experts",
-    impact3p:"Translating AI into practical, everyday use for individuals and small businesses who feel stuck by 'AI sounds too hard.' Ongoing support to keep a technology gap from becoming an opportunity gap.",
-    priceTitle:"Sample Pricing",
-    price1n:"SEO Audit Report", price1d:"Identify current issues and propose prioritized improvements.",
-    price2n:"LP Structure Design", price2d:"From flow design through to wireframes.",
-    price3n:"SNS Management", price3d:"Ongoing posting design, analysis, and improvement cycles.", price3amt:"¥50,000〜/monthly",
+    impactLead:"What matters most to me is not keeping specialized knowledge for a select few. Every time I've worked with people or businesses facing a gap in reach or technical skill, I've found real satisfaction in seeing my abilities directly become someone else's opportunity. I want to carry that same ownership of outcomes into contributing to your company's growth.",
+    impact1h:"Ownership: taking responsibility for results",
+    impact1p:"Improved small businesses' visibility through SEO and SNS strategy so they reach the customers they should. I've repeatedly tested hypotheses against real data, always with a strong sense of ownership over the outcome.",
+    impact2h:"Sharing expertise instead of gatekeeping it",
+    impact2p:"Rebuilt specialized crafts like calligraphy using digital technology and paired them with native translation to reach audiences at home and abroad — sharing expertise widely and accurately rather than keeping it to myself.",
+    impact3h:"Staying adaptable and never done learning",
+    impact3p:"I've continually taught myself new areas — from AI adoption to the latest frontend technologies — and put them straight into practice. I want to bring that same learning drive and execution to your company's growth.",
     faqTitle:"FAQ",
-    faq1q:"Can I consult even with a small budget?", faq1a:"Yes. Let's start with a free consultation to understand your situation and find an approach that fits your budget.",
-    faq2q:"Is an ongoing contract required?", faq2a:"One-off requests are also welcome — many clients start with a single spot consultation.",
-    faq3q:"Is working with someone based overseas an issue?", faq3a:"I work fully remote by default and am used to online collaboration. Just let me know about time-zone differences in advance.",
-    contactTitle:"Get a free consultation",
-    contactP:"Send your site's URL and I'll return a free quick diagnosis of your first-view (hero section).",
-    contactCta:"Start a chat with the AI Navigator"
+    faq1q:"Why do you use two names, HATTORI and KAZUYA?", faq1a:"I keep a clear separation between my professional legal name (HATTORI ICHIDAI) and a pen name used for personal creative work (KAZUYA). After joining a company, I'd continue personal creative projects only to the extent they don't interfere with work.",
+    faq2q:"Your track record is mainly fully remote — are you open to in-office or on-site work?", faq2a:"Yes, I can adapt flexibly depending on the role and your company's setup. I'm happy to discuss working arrangements in more detail during an interview.",
+    faq3q:"Your experience is mainly freelance — do you have experience working within a team?", faq3a:"While working as a freelancer, I've consistently collaborated with client-side teams and stakeholders on project management and joint work.",
+    contactTitle:"Interview & Contact",
+    contactP:"I'm happy to share more detail on my work history and past projects. If you have any questions, please feel free to reach out below.",
+    contactCta:"Ask the AI Navigator"
   }
 };
 
